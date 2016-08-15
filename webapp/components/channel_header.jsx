@@ -490,29 +490,31 @@ export default class ChannelHeader extends React.Component {
                     </li>
                 );
 
-                dropdownContents.push(
-                    <li
-                        key='rename_channel'
-                        role='presentation'
-                    >
-                        <a
-                            role='menuitem'
-                            href='#'
-                            onClick={this.showRenameChannelModal}
+                if (isAdmin || isSystemAdmin) {
+                    dropdownContents.push(
+                        <li
+                            key='rename_channel'
+                            role='presentation'
                         >
-                            <FormattedMessage
-                                id='channel_header.rename'
-                                defaultMessage='Rename {term}...'
-                                values={{
-                                    term: (channelTerm)
-                                }}
-                            />
-                        </a>
-                    </li>
-                );
+                            <a
+                                role='menuitem'
+                                href='#'
+                                onClick={this.showRenameChannelModal}
+                            >
+                                <FormattedMessage
+                                    id='channel_header.rename'
+                                    defaultMessage='Rename {term}...'
+                                    values={{
+                                        term: (channelTerm)
+                                    }}
+                                />
+                            </a>
+                        </li>
+                    );
 
-                if (!ChannelStore.isDefault(channel)) {
-                    dropdownContents.push(deleteOption);
+                    if (!ChannelStore.isDefault(channel)) {
+                        dropdownContents.push(deleteOption);
+                    }
                 }
             } else if (this.state.userCount === 1) {
                 dropdownContents.push(deleteOption);
